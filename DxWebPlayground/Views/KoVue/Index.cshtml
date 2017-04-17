@@ -1,0 +1,107 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@section scripts{
+    @Scripts.Render("~/Bundles/jquery")
+    <script src="~/Scripts/knockout-3.3.0.js"></script>
+    <script src="~/Scripts/vue.js"></script>
+    <script src="~/Scripts/slimScroll/jquery.slimscroll.js"></script>
+    <script src="~/Scripts/KoVue/Index.js"></script>
+    <script src="~/Scripts/KoVue/KnockoutModel.js"></script>
+    <script src="~/Scripts/KoVue/VueModel.js"></script>
+}
+
+<style type="text/css">
+    .no-padding {
+        padding: 0;
+    }
+    .float-right {
+        float: right;
+    }
+    .truncate {
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .hover {
+        cursor: pointer
+    }
+</style>
+<h2>Index</h2>
+<div class="row">
+    <div id="campaigns-vue" class="col-md-6" v-show="ready" style="display: none">
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <h3>
+                    Vue
+                    <span class="float-right">
+                        {{ bulkPerformance }} ms
+                    </span>
+                </h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6 no-padding">
+                            <a v-on:click="bulkSelect(true)" class="hover">Select</a> | 
+                            <a v-on:click="bulkSelect(false)" class="hover">Unselect</a>
+                        </div>
+                        <div class="col-md-6 no-padding">
+                            <p style="float: right">Selected : {{ selectedCampaigns }}</p>
+                        </div>
+                    </div>
+                    <div class="col-md-12"></div>
+                </div>
+            </div>
+            <div class="campaigns-container">
+                <div class="col-md-6">
+                    <div v-for="campaign in selected(false)">
+                        <p class="truncate hover" v-on:click="select(campaign,true)">{{ campaign.CampaignName }}</p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+                    <div v-for="campaign in selected(true)">
+                        <p class="truncate hover" v-on:click="select(campaign,false)">{{ campaign.CampaignName }}</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+    <div id="campaigns-ko" class="col-md-6 float-right" data-bind="visible : ready" style="display: none">
+        <div class="panel panel-default">
+            <div class="col-md-12">
+                <h3>
+                    Knockout
+                    <span class="float-right">
+                        <span data-bind="text : bulkPerformance"></span> ms
+                    </span>
+                </h3>
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="col-md-6 no-padding">
+                            <a class="hover" data-bind="click : function () { bulkSelect(true) }">Select</a> | 
+                            <a class="hover" data-bind="click : function () { bulkSelect(false) }">Unselect</a>
+                        </div>
+                        <div class="col-md-6 no-padding">
+                            <p style="float: right">Selected : <span data-bind="text : selectedCampaigns"></span></p>
+                        </div>
+                    </div>
+                    <div class="col-md-12"></div>
+                </div>
+            </div>
+            <div class="campaigns-container">
+                <div class="col-md-6">
+                    <div data-bind="foreach : campaigns">
+                        <p class="truncate hover" data-bind="text : name, click : function() { select(true) } , visible : !selected()"></p>
+                    </div>
+                </div>
+                <div class="col-md-6">
+
+                    <div data-bind="foreach : campaigns">
+                        <p class="truncate hover" data-bind="text : name, click : function() { select(false) } , visible : selected()"></p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
