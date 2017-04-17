@@ -129,7 +129,9 @@
     <Content Include="Content\Site.css" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
-    <Content Include="Content\Resources\campaigns.json" />
+    <Content Include="Content\Resources\campaigns.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
     <Content Include="Scripts\KoVue\Index.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
