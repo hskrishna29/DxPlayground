@@ -151,6 +151,7 @@
     <Content Include="Scripts\slimScroll\jquery.slimscroll.js" />
     <Content Include="Scripts\slimScroll\jquery.slimscroll.min.js" />
     <Content Include="Scripts\vue.js" />
+    <Content Include="Scripts\vue.min.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
