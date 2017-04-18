@@ -31,10 +31,8 @@ var MainViewModel = function () {
     });
 }
 
-var KoModule = function($, mainModule) {
-    $(document).ready(function () {
-
-        var koCallback = function (data) {
+var KoModule = function($) {
+        var load = function (data) {
             var t0 = performance.now();
             var model = new MainViewModel();
             var campaignsList = [];
@@ -52,7 +50,9 @@ var KoModule = function($, mainModule) {
                 height: "400px"
             });
         }
-        mainModule.getData(koCallback);
-    });
-}($, MainModule);
+        
+        return {
+            load : load
+        }
+}($);
 

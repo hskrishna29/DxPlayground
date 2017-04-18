@@ -1,11 +1,14 @@
-﻿var MainModule = function($) {
-    var getData = function(callback) {
-        $.getJSON("../Content/Resources/campaigns.json", function (data) {
-            callback(data);
-        }).fail(function () { console.log("Oops, something went wrong") });
-    }
+﻿var MainModule = function ($, vueModule, koModule) {
+    $(document).ready(function() {
+        var getData = function () {
+            $.getJSON("../Content/Resources/campaigns.json", function (data) {
 
-    return {
-        getData : getData
-    }
-}($);
+                vueModule.load(data);
+                koModule.load(data);
+
+            }).fail(function () { console.log("Oops, something went wrong") });
+        }
+        getData();
+    });
+
+}($, VueModule, KoModule);

@@ -40,10 +40,9 @@ var MainVueModel = {
     }
 }
 
-var VueModule = function($, mainModule) {
-    $(document).ready(function () {
+var VueModule = function($) {
 
-        var vueCallback = function (data) {
+    var load = function (data) {
             var t0 = performance.now();
             var model = new Vue(MainVueModel);
             var campaignsList = [];
@@ -60,6 +59,7 @@ var VueModule = function($, mainModule) {
             });
         }
 
-        mainModule.getData(vueCallback);
-    });
-}($, MainModule);
+        return {
+            load : load
+        }
+}($);
