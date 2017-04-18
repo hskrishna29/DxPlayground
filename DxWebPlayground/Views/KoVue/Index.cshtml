@@ -52,7 +52,7 @@
                     <div class="col-md-12"></div>
                 </div>
             </div>
-            <div class="campaigns-container">
+            <div id="campaigns-container-vue">
                 <div class="col-md-6">
                     <div v-for="campaign in selected(false)">
                         <p class="truncate hover" v-on:click="select(campaign,true)">{{ campaign.CampaignName }}</p>
@@ -89,7 +89,7 @@
                     <div class="col-md-12"></div>
                 </div>
             </div>
-            <div class="campaigns-container">
+            <div id="campaigns-container-ko">
                 <div class="col-md-6">
                     <div data-bind="foreach : campaigns">
                         <p class="truncate hover" data-bind="text : name, click : function() { select(true) } , visible : !selected()"></p>

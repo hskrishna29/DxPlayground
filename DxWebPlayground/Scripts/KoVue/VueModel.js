@@ -55,7 +55,7 @@ var VueModule = function($, mainModule) {
             model._data.ready = true;
             var t1 = performance.now();
             model.bulkPerformance = parseInt(t1 - t0);
-            $(".campaigns-container").slimScroll({
+            $("#campaigns-container-vue").slimScroll({
                 height: "400px"
             });
         }

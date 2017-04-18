@@ -48,7 +48,7 @@ var KoModule = function($, mainModule) {
 
             var t1 = performance.now();
             model.bulkPerformance(parseInt(t1 - t0));
-            $(".campaigns-container").slimScroll({
+            $("#campaigns-container-ko").slimScroll({
                 height: "400px"
             });
         }
