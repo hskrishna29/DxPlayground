@@ -15,6 +15,7 @@ var MainViewModel = function () {
     self.ready = ko.observable(false);
     self.bulkPerformance = ko.observable(0);
     self.campaigns = ko.observableArray([]);
+    self.dependencyTrackingEnabled = ko.observable(false);
     self.bulkSelect = function (selected) {
         var t0 = performance.now();
         $.each(self.campaigns(), function (index, item) {
@@ -24,6 +25,8 @@ var MainViewModel = function () {
         self.bulkPerformance(parseInt(t1 - t0));
     }
     self.selectedCampaigns = ko.computed(function () {
+        if (!self.dependencyTrackingEnabled())
+            return 0;
         var selected = self.campaigns().filter(function (campaign) {
             return campaign.selected() === true;
         });

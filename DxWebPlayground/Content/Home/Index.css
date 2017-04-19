@@ -1,0 +1,18 @@
+﻿.no-padding {
+        padding: 0;
+    }
+    .float-right {
+        float: right;
+    }
+    .truncate {
+        width: 250px;
+        white-space: nowrap;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+    .hover {
+        cursor: pointer
+    }
+    .font-13 {
+        font-size: 13px
+    }

@@ -5,7 +5,8 @@ var MainVueModel = {
     data: {
         campaigns: [],
         bulkPerformance: 0,
-        ready: false
+        ready: false,
+        dependencyTrackingEnabled : false
     },
     methods: {
         select: function (item, isSelected) {
@@ -35,6 +36,9 @@ var MainVueModel = {
     },
     computed: {
         selectedCampaigns: function () {
+            if (!this.dependencyTrackingEnabled)
+                return 0;
+
             return this.selected(true).length;
         }
     }
