@@ -50,12 +50,12 @@
                     <div class="row">
                         <div id="campaigns-container-vue">
                             <div class="col-md-6">
-                                <div v-for="campaign in selected(false)">
+                                <div v-for="campaign in selected(false)" :key="campaign.SearchEngineCampaignId">
                                     <p class="truncate hover" v-on:click="select(campaign,true)">{{ campaign.CampaignName }}</p>
                                 </div>
                             </div>
                             <div class="col-md-6">
-                                <div v-for="campaign in selected(true)">
+                                <div v-for="campaign in selected(true)" :key="campaign.SearchEngineCampaignId">
                                     <p class="truncate hover" v-on:click="select(campaign,false)">{{ campaign.CampaignName }}</p>
                                 </div>
                             </div>

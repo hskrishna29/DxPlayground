@@ -20,6 +20,7 @@
     <IISExpressAnonymousAuthentication />
     <IISExpressWindowsAuthentication />
     <IISExpressUseClassicPipelineMode />
+    <UseGlobalApplicationHostFile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -111,8 +112,11 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\KnockoutStrapController.cs" />
     <Compile Include="Controllers\KoVueController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\ReactController.cs" />
+    <Compile Include="Controllers\VueController.cs" />
     <Compile Include="CustomAttributes\CustomExceptionAttribute.cs" />
     <Compile Include="CustomException\ValidationException.cs" />
     <Compile Include="Global.asax.cs">
@@ -121,6 +125,7 @@
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-treeview\bootstrap-treeview.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\Home\Index.css" />
@@ -128,12 +133,17 @@
     <Content Include="fonts\glyphicons-halflings-regular.svg" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Scripts\bootstrap-treeview.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="Content\Resources\campaigns.json">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Content\Resources\campaigns-tree.json" />
+    <Content Include="Content\Resources\postmock.json" />
     <None Include="Scripts\jquery-1.10.2.intellisense.js" />
+    <Content Include="Scripts\knockstrap.min.js" />
+    <Content Include="Scripts\KnockStrap\Index.js" />
     <Content Include="Scripts\KoVue\Index.js" />
     <Content Include="Scripts\jquery-1.10.2.js" />
     <Content Include="Scripts\jquery-1.10.2.min.js" />
@@ -147,12 +157,16 @@
     <Content Include="Scripts\KoVue\KnockoutModel.js" />
     <Content Include="Scripts\KoVue\VueModel.js" />
     <Content Include="Scripts\modernizr-2.6.2.js" />
+    <Content Include="Scripts\react-pivot-standalone-3.0.0.min.js" />
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\slimScroll\jquery.slimscroll.js" />
     <Content Include="Scripts\slimScroll\jquery.slimscroll.min.js" />
+    <Content Include="Scripts\vue-strap.min.js" />
     <Content Include="Scripts\vue.js" />
     <Content Include="Scripts\vue.min.js" />
+    <Content Include="Scripts\Vue\Index.js" />
+    <Content Include="Scripts\Vue\VueModel.js" />
     <Content Include="Scripts\_references.js" />
     <Content Include="Web.config">
       <SubType>Designer</SubType>
@@ -172,6 +186,9 @@
     <Content Include="Views\Home\Index.cshtml" />
     <Content Include="Scripts\jquery-1.10.2.min.map" />
     <Content Include="Views\KoVue\Index.cshtml" />
+    <Content Include="Views\KnockoutStrap\Index.cshtml" />
+    <Content Include="Views\Vue\Index.cshtml" />
+    <Content Include="Views\React\Pivot.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

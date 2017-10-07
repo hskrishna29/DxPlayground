@@ -1,0 +1,112 @@
+﻿@{
+    ViewBag.Title = "KnockStrap";
+}
+
+@section scripts{
+    <script src="~/Scripts/knockout-3.3.0.js"></script>
+    <script src="~/Scripts/knockstrap.min.js"></script>
+    <script src="~/Scripts/bootstrap-treeview.js"></script>
+    <script src="~/Scripts/KnockStrap/Index.js"></script>
+}
+<link type="text/css" rel="stylesheet" href="~/Content/bootstrap-treeview/bootstrap-treeview.css"/>
+<h2>KnockStrap</h2>
+
+
+
+<button class="btn btn-success" data-bind="click: show">open sesame</button>
+<div data-bind="modal : { 
+     visible : modalVisible,
+     dialogCss: modalSize,  
+     header : { data: { label: 'Keyword Match Types' } },
+     body : {  name : modalTemplate , data : modalDataViewModel },
+     footer : { name : 'addkeyword-modalfooter' , data : $data } }">
+    
+</div>
+
+<script type="text/html" id="xyzTemplate">
+    <p>asdad</p>
+    <p>asdadsadjadh</p>
+</script>
+
+<script type="text/html" id="addkeyword-step1">
+    <!--ko with : step1ViewModel -->
+    <div class="row">
+        <div class="col-md-12 col-sm-12 col-xs-12">
+            <div class="col-md-4 col-sm-4 col-xs-4">
+                <textarea class="form-control" style="height: 300px; resize: none" data-bind="value : keywords"></textarea>
+            </div>
+            <div class="col-md-4  col-sm-4 col-xs-4">
+                <p data-bind="text : title">
+                </p>
+                <div class="form-group" data-toggle="buttons" data-bind="checkbox: matchTypes">
+                    <label class="btn btn-default form-control">
+                        <input type="checkbox" value="all"/>
+                        All
+                    </label>
+                    <label class="btn btn-default form-control">
+                        <input type="checkbox" value="broad"/>
+                        Broad Match
+                    </label>
+                    <label class="btn btn-default form-control">
+                        <input type="checkbox" value="broad-modified"/>
+                        +Broad +Modified
+                    </label>
+                    <label class="btn btn-default form-control">
+                        <input type="checkbox" value="phrase"/>
+                        "Phrase Match"
+                    </label>
+                    <label class="btn btn-default form-control">
+                        <input type="checkbox" value="exact"/>
+                        [Exact Match]
+                    </label>
+                </div>
+            </div>
+            <div class="col-md-4  col-sm-4 col-xs-4">
+                <textarea class="form-control" style="height: 300px; resize: none" data-bind="value : generatedKeywords"></textarea>
+            </div>
+        </div>
+    </div>
+    <!--/ko -->
+</script>
+
+<script type="text/html" id="addkeyword-modalfooter">
+    <button class="btn btn-success" data-bind="click: next, visible: modalTemplate() == 'addkeyword-step1', enable : modalDataViewModel.enableAdgroupSelection">Select Adgroup</button>
+    <button class="btn btn-success" data-bind="click: back, visible: modalTemplate() == 'addkeyword-step2'">Back</button>
+    <button class="btn btn-success" data-bind="click: add, visible: modalTemplate() == 'addkeyword-step2'">Add To Adgroup</button>
+</script>
+
+<script type="text/html" id="addkeyword-step2">
+    <!--ko with : step2ViewModel -->
+    <div class="row">
+        <div classs="col-md-12">
+            <div>
+                <div class="col-md-5 pull-right">
+                    <input class="form-control" data-bind="value : query"/>
+                </div>
+            </div>
+            <p>filter</p>
+        </div>
+    </div>
+
+    <ul id="tree" data-bind="template : {name : 'tree-node' , foreach : filteredNodes }"></ul>
+    <!--/ko-->
+</script>
+
+
+<script type="text/html" id="tree-node">
+    <!-- Campaigns will have nodes, Adgroups will not -->
+    <li>
+        <!-- ko if : $data.nodes == null -->
+        <div class="radio">
+            <label>
+                <input type="radio" data-bind="attr : { id : text , name : 'campaign-tree'}">
+                <span data-bind="text: text"></span>
+            </label>
+        </div>
+        <!--/ko-->
+        <!-- ko if : $data.nodes != null -->
+        <span data-bind="text : text"></span>
+        <ul data-bind="template : {name : 'tree-node' , foreach : nodes }"></ul>
+        <!--/ko-->
+    </li>
+</script>

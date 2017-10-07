@@ -1,0 +1,63 @@
+﻿{
+  "campaigns": [
+    {
+      "text": "Campaign 1",
+      "nodes": [
+        {
+          "text": "Adgroup 1"
+        },
+        {
+          "text": "Adgroup 2"
+        }
+      ]
+    },
+    {
+      "text": "Campaign 2",
+      "nodes": [
+        {
+          "text": "Adgroup 1"
+        },
+        {
+          "text": "Adgroup 2"
+        },
+        {
+          "text": "Adgroup 3"
+        }
+      ]
+    },
+    {
+      "text": "Campaign 3",
+      "nodes": [
+        {
+          "text": "Adgroup 1"
+        },
+        {
+          "text": "Adgroup 2"
+        },
+        {
+          "text": "Adgroup 3"
+        },
+        {
+          "text": "Adgroup 4"
+        }
+      ]
+
+    },
+    {
+      "text": "Campaign 4",
+      "nodes": [
+        {
+          "text": "Adgroup 1"
+        }
+      ]
+    },
+    {
+      "text": "Campaign 5",
+      "nodes": [
+        {
+          "text": "Adgroup 1"
+        }
+      ]
+    }
+  ]
+}

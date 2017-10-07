@@ -1,0 +1,75 @@
+﻿@{
+    ViewBag.Title = "Pivot";
+}
+@section scripts{
+    @Scripts.Render("~/Bundles/jquery")
+
+    <script src="~/Scripts/react-pivot-standalone-3.0.0.min.js"></script>
+    <script>
+        
+        $(document).ready(function() {
+            var getData = function () {
+                $.getJSON("../Content/Resources/postmock.json", function (data) {
+
+                    initializePivotTable(data);
+
+                }).fail(function () { console.log("Oops, something went wrong") });
+            }
+            getData();
+        });
+        var initializePivotTable = function(data) {
+            var rows = data;
+
+            // These are your "groups"
+            // "title" is the title of the column
+            // all rows with the same "value" will be grouped
+            var dimensions = [
+                // "value" can be the key of what you want to group on
+                { title: 'Post Text', value: 'text' },
+                { title: 'Post Title', value: 'title' },
+                { title: 'Post Display Link', value: 'displayLink' },
+                { title: 'Post Link', value: 'link' },
+                { title: 'Post Description', value: 'linkDescription' }
+                // "value" can also be function that returns what you want to group on
+            ];
+            // Calculations are columns for the "memo" object built up above
+            // "title" is the title of the column
+            var calculations = [
+                // "value" can be the key of the "memo" object from reduce
+                // "template" changes the display of the value, but not sorting behavior
+                {
+                    title: 'Impressions', value: 'impressions',
+                    template: function(val, row) { return val; }
+                },
+                {
+                    title: 'Ads', value: 'adCount',
+                    template: function(val, row) { return val; }
+                }
+                //{
+                //    title: 'Ads',
+                //    // "value" can also be a function
+                //    value: function (memo) { return memo.adCount },
+                //    template: function (val, row) { return val },
+                //    // you can also give a column a custom class (e.g. right align for numbers)
+                //    className: 'alignRight'
+                //}
+            ];
+            var reduce = function(row, memo) {
+                // the memo object starts as {} for each group, build it up
+                memo.adCount = (memo.adCount || 0) + parseInt(row.adCount);
+                memo.impressions = (memo.impressions || 0) + parseFloat(row.impressions);
+                memo.clicks = (memo.clicks|| 0) + parseFloat(row.clicks);
+                // be sure to return it when you're done for the next pass
+                return memo;
+            };
+            ReactPivot(document.body,
+                {
+                    rows: rows,
+                    dimensions: dimensions,
+                    calculations: calculations,
+                    reduce: reduce
+                });
+        }
+        
+    </script>
+}

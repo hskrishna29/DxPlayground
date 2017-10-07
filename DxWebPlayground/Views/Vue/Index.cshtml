@@ -1,0 +1,124 @@
+﻿@{
+    ViewBag.Title = "Index";
+}
+@section scripts{
+    @Scripts.Render("~/Bundles/jquery")
+
+<script src="https://unpkg.com/lodash@4.13.1/lodash.min.js"></script>
+    <script src="~/Scripts/vue.min.js"></script>
+    <script src="~/Scripts/vue-strap.min.js"></script>
+    <script src="~/Scripts/slimScroll/jquery.slimscroll.js"></script>
+    <script src="~/Scripts/Vue/VueModel.js"></script>
+}
+@*<template id="list-template-1">
+    <li :id="id" class="list-group-item" v-on:click="itemClick">
+        {{ text }}
+    </li>
+</template>
+
+<template id="list-template-2">
+    <li :id="item.SearchEngineCampaignId" class="list-group-item" v-on:click="itemClick">
+        <span><i :class="getClass"></i>{{ item.CampaignName }}</span>
+        <slot></slot>
+    </li>
+</template>*@
+
+<template id="list-template">
+    <div>
+        <div v-for="(item,index) in items" :id="item.id" class="list-group-item" v-on:click="itemClick(item,index)" :key="item.id">
+            <span>
+                <i :class="getClass(item.status)"></i>
+                {{ item.text }} - Selected {{ item.selected }}
+            </span>
+        </div>
+    </div>
+</template>
+
+<template id="choose-items" style="height : 500px">
+    <div class="row">
+        <div class="col-md-12">
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="col-md-12">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <div class="input-group">
+                                        <div class="input-group-btn">
+                                            <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">{{ status }} <span class="caret"></span></button>
+                                            <ul class="dropdown-menu">
+                                                <li><a v-on:click="setStatus('All')">All</a></li>
+                                                <li><a v-on:click="setStatus('All Active')">All Active</a></li>
+                                            </ul>
+                                        </div><!-- /btn-group -->
+                                        
+                                        <input class="form-control" v-model="searchTerm" />
+                                    </div><!-- /input-group -->
+
+                                    <a v-on:click="bulkSelect(true)">Select All</a>
+                                    <a v-on:click="bulkSelect(false)">Unselect All</a>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 list-container">
+                                    <span v-show="getselectableItems.length === 0">No results</span>
+                                    <list-view :items="getselectableItems" v-on:itemclicked="select">
+                                    </list-view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+            <div class="col-md-6">
+                <div class="panel panel-default">
+                    <div class="col-md-12">
+                        <div class="panel-heading">
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <input class="form-control" />
+                                    <span>Total campaigns : ( {{ items.length }} )</span>
+                                    <span>Selected campaigns : ( {{ selected(true).length }} )</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="panel-body">
+                            <div class="row">
+                                <div class="col-md-12 list-container">
+                                    <list-view :items="selected(true)" v-on:itemclicked="unselect">
+                                    </list-view>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</template>
+<div id="page-container">
+
+    @*<custom-list-view v-for="item in items"></custom-list-view>*@
+
+    @*<ul>
+            <li v-for="item in items" :key="item.SearchEngineCampaignId">
+                {{ item.CampaignName }}
+            </li>
+
+            <list-view-item-generic v-for="item in items" :id="item.SearchEngineCampaignId" :text="item.CampaignName" v-on:itemclicked="select(item)">
+            </list-view-item-generic>
+
+            <list-view-item-specific v-for="item in items" :item="item" v-on:itemclicked="select(item)">
+                <span>{{ item.SearchEngineCampaignId }}</span>
+            </list-view-item-specific>
+
+            <li v-for="item in items" :id="id" class="list-group-item" v-on:click="itemClick">
+                {{ item.CampaignName }}
+            </li>
+        </ul>*@
+    <choose-items :items="items"></choose-items>
+</div>
